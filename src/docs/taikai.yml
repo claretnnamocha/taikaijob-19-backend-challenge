@@ -219,6 +219,9 @@ definitions:
       country:
         type: string
         required: true
+      market:
+        type: string
+        required: true
       skills:
         type: array
         items:
@@ -243,6 +246,8 @@ definitions:
       planet:
         type: string
       country:
+        type: string
+      market:
         type: string
       skills:
         type: array

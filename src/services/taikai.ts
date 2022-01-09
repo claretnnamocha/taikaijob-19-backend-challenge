@@ -4,7 +4,7 @@ import { jwt, mail } from "../helpers";
 import {
   activateMail,
   deactivateMail,
-  registrationMail
+  registrationMail,
 } from "../helpers/mail-messages";
 import { Job, User } from "../models";
 import { JobSchema, UserSchema } from "../types/models";
@@ -142,7 +142,7 @@ export const createJob = async (
   params: taikai.CreateJob
 ): Promise<others.Response> => {
   try {
-    await Job.create(params);
+    await Job.create({ ...params, id: uuid() });
 
     return { status: true, message: "Job created successful" };
   } catch (error) {
@@ -199,7 +199,7 @@ export const getAllJobs = async (
       metadata: { total, page, pageSize },
     };
   } catch (error) {
-    return { status: false, message: "Error trying to get all jobs" + error };
+    return { status: false, message: "Error trying to get all jobs" };
   }
 };
 
