@@ -5,8 +5,7 @@ const swagger: Options = {
   swaggerDefinition: {
     info: {
       version: "1.0.0",
-      description: "Template backend",
-      title: "Template Backend API",
+      title: "Taikai Job 19 Challenge Backend API",
       contact: { name: "Claret Nnamocha", email: "devclareo@gmail.com" },
       servers: [{ url: `http://localhost:${port}` }],
     },
