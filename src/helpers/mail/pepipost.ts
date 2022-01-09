@@ -34,6 +34,7 @@ export const send = async (
 
     const r = await fetch("https://api.pepipost.com/v5.1/mail/send", options);
     const d = await r.json();
+    console.log(d);
 
     return d.status === "success";
   } catch (error) {
