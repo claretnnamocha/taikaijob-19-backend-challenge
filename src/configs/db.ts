@@ -33,16 +33,16 @@ const seed = async (models: any) => {
     role: "admin",
   });
 
-  await models.Job.create({
-    id: uuid(),
-    title: "Nodejs Position",
-    description: "Nodejs developer xtradonaire",
-    skills: ["node"],
-    market: "financial services",
-    type: "internship",
-    country: "Country",
-    planet: "Earth",
-  });
+  // await models.Job.create({
+  //   id: uuid(),
+  //   title: "Nodejs Position",
+  //   description: "Nodejs developer xtradonaire",
+  //   skills: ["node"],
+  //   market: "financial services",
+  //   type: "internship",
+  //   country: "Country",
+  //   planet: "Earth",
+  // });
 
   // todo: plant other db seeds 😎
 
