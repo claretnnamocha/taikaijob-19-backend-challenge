@@ -4,6 +4,7 @@ import { sendJobAlerts } from "./sendJobAlerts";
 
 export const execJobAlerts = async () => {
   try {
+    console.log("aha");
     await jobs.add({
       queue: JobAlertQueue,
       options: {
