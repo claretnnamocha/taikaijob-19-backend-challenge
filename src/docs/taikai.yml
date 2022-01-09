@@ -254,7 +254,6 @@ definitions:
         items:
           oneOf:
             type: "string"
-            required: true
   jobDetails:
     type: object
     properties:
