@@ -4,7 +4,9 @@ import { dbURL, dialect } from "./env";
 
 export const db = new Sequelize(dbURL, {
   dialect,
-  dialectOptions: { ssl: { require: true, rejectUnauthorized: false } },
+  dialectOptions: dbURL.includes("localhost")
+    ? {}
+    : { ssl: { require: true, rejectUnauthorized: false } },
   logging: false,
 });
 
@@ -13,13 +15,33 @@ const seed = async (models: any) => {
 
   await models.User.create({
     id: uuid(),
-    username: "alpha",
-    email: "devclareo@gmail.com",
     firstname: "Claret",
     lastname: "Nnamocha",
-    password: "Alpha123",
-    roles: "super-admin",
-    verifiedemail: true,
+    email: "devclareo@gmail.com",
+    country: "Nigeria",
+    planet: "Earth",
+  });
+
+  await models.User.create({
+    id: uuid(),
+    firstname: "Claret",
+    lastname: "Nnamocha",
+    email: "claretnnamocha@gmail.com",
+    country: "Nigeria",
+    password: "Password123!",
+    planet: "Earth",
+    role: "admin",
+  });
+
+  await models.Job.create({
+    id: uuid(),
+    title: "Nodejs Position",
+    description: "Nodejs developer xtradonaire",
+    skills: ["node"],
+    market: "financial services",
+    type: "internship",
+    country: "Country",
+    planet: "Earth",
   });
 
   // todo: plant other db seeds 😎

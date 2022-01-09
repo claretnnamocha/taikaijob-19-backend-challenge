@@ -1,18 +1,26 @@
 import SendGridMail from "@sendgrid/mail";
-import Bull from "bull";
-import { sendEmail } from "./send";
 
-const { SENDGRID_API_KEY } = process.env;
+const { SENDGRID_API_KEY, EMAIL_FROM, EMAIL_NAME } = process.env;
 
-const _send = async (job: Bull.Job) => {
-  let { to, subject, text, html, from, fromName } = job.data;
-  SendGridMail.setApiKey(SENDGRID_API_KEY);
+export const send = async (
+  to: string | Array<string>,
+  subject: string,
+  text: string,
+  html: string = null,
+  from: string = EMAIL_FROM,
+  fromName: string = EMAIL_NAME
+) => {
+  try {
+    SendGridMail.setApiKey(SENDGRID_API_KEY);
 
-  from = `${fromName} <${from}>`;
+    from = `${fromName} <${from}>`;
 
-  const msg = { to, subject, text, html, from };
+    const msg = { to, subject, text, html, from };
 
-  await SendGridMail.send(msg);
+    await SendGridMail.send(msg);
+
+    return true;
+  } catch (error) {
+    return false;
+  }
 };
-
-export const send = sendEmail({ callback: _send, queueName: "SendGrid Email" });

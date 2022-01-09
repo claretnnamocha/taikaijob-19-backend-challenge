@@ -1,0 +1,258 @@
+paths:
+  /sign-in:
+    post:
+      summary: "Admin sign in"
+      tags:
+        - Endpoints
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: "#/definitions/signIn"
+      responses:
+        200:
+          description: Success
+
+  /subscribe:
+    post:
+      tags:
+        - Endpoints
+      produces:
+        - application/json
+      summary: "Subscribe/register to Job posting service"
+      parameters:
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: "#/definitions/signUp"
+      responses:
+        200:
+          description: Success
+
+  /activate:
+    get:
+      tags:
+        - Endpoints
+      produces:
+        - application/json
+      summary: "Activate Job posting alerts"
+      parameters:
+        - in: query
+          name: email
+          required: true
+      responses:
+        200:
+          description: Success
+
+  /deactivate:
+    get:
+      tags:
+        - Endpoints
+      produces:
+        - application/json
+      summary: "Deactivate Job posting alerts"
+      parameters:
+        - in: query
+          name: email
+          required: true
+      responses:
+        200:
+          description: Success
+
+  /job:
+    get:
+      tags:
+        - Endpoints
+      produces:
+        - application/json
+      summary: "Get specific Job posting"
+      parameters:
+        - in: query
+          name: jobId
+          required: true
+      responses:
+        200:
+          description: Success
+
+    post:
+      tags:
+        - Endpoints
+      produces:
+        - application/json
+      summary: "Create Job posting [Admin]"
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: "#/definitions/createJob"
+      responses:
+        200:
+          description: Success
+
+    put:
+      tags:
+        - Endpoints
+      produces:
+        - application/json
+      summary: "Update Job posting [Admin]"
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: "#/definitions/updateJob"
+      responses:
+        200:
+          description: Success
+
+    delete:
+      tags:
+        - Endpoints
+      summary: "Delete Job posting [Admin]"
+      produces:
+        - application/json
+      security:
+        - Bearer: []
+      parameters:
+        - in: body
+          name: request
+          required: true
+          schema:
+            $ref: "#/definitions/jobDetails"
+      responses:
+        200:
+          description: Success
+
+  /jobs:
+    get:
+      tags:
+        - Endpoints
+      produces:
+        - application/json
+      summary: "Search for Job postings"
+      parameters:
+        - in: query
+          name: q
+        - in: query
+          name: type
+          enum: ["full time", "contract", "internship"]
+        - in: query
+          name: country
+        - in: query
+          name: planet
+        - in: query
+          name: market
+        - in: query
+          name: skills
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        - in: query
+          name: page
+          type: integer
+          default: 1
+          required: true
+        - in: query
+          name: pageSize
+          type: integer
+          default: 10
+          required: true
+      responses:
+        200:
+          description: Success
+
+definitions:
+  signIn:
+    type: object
+    properties:
+      email:
+        type: string
+        required: true
+      password:
+        type: string
+        required: true
+  signUp:
+    type: object
+    properties:
+      firstname:
+        type: string
+        required: true
+      lastname:
+        type: string
+        required: true
+      email:
+        type: string
+        required: true
+      planet:
+        type: string
+        required: true
+      country:
+        type: string
+        required: true
+  createJob:
+    type: object
+    properties:
+      title:
+        type: string
+        required: true
+      description:
+        type: string
+        required: true
+      type:
+        type: string
+        enum: ["full time", "contract", "internship"]
+        description: 'valid values: "full time", "contract", "internship"'
+        required: true
+      planet:
+        type: string
+        required: true
+      country:
+        type: string
+        required: true
+      skills:
+        type: array
+        items:
+          oneOf:
+            type: "string"
+            required: true
+        required: true
+  updateJob:
+    type: object
+    properties:
+      jobId:
+        type: string
+        required: true
+      title:
+        type: string
+      description:
+        type: string
+      type:
+        type: string
+        enum: ["full time", "contract", "internship"]
+        description: 'valid values: "full time", "contract", "internship"'
+      planet:
+        type: string
+      country:
+        type: string
+      skills:
+        type: array
+        items:
+          oneOf:
+            type: "string"
+            required: true
+  jobDetails:
+    type: object
+    properties:
+      jobId:
+        type: string
+        required: true

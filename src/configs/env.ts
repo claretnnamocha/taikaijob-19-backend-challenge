@@ -9,7 +9,6 @@ const schema = Joi.object({
     .default("development"),
   PORT: Joi.number().required(),
   JWT_SECRET: Joi.string().required(),
-  JWT_EXPIRATION_TIME: Joi.string().required(),
   DB_URL: Joi.string().required().description("Database connection URL"),
   DB_DIALECT: Joi.string().required().description("Database type"),
 })
@@ -24,5 +23,4 @@ export const env = _env.NODE_ENV;
 export const port = _env.PORT;
 export const dbURL = _env.DB_URL;
 export const jwtSecret = _env.JWT_SECRET;
-export const jwtExpirationTime = _env.JWT_EXPIRATION_TIME;
 export const dialect = _env.DB_DIALECT;

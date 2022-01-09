@@ -1,2 +1,2 @@
-export { Token } from "./Token";
+export { Job } from "./Job";
 export { User } from "./User";

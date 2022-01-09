@@ -4,6 +4,7 @@ import express, { NextFunction, Response } from "express";
 import formdata from "express-form-data";
 import swaggerUi from "swagger-ui-express";
 import { bullBoard, db, env, security, swagger } from "./configs";
+import { exec } from "./cron";
 import { response } from "./helpers";
 import routes from "./routes";
 import { CustomRequest } from "./types/controllers";
@@ -12,6 +13,7 @@ config();
 const app = express();
 const port: number = env.port;
 db.authenticate(db.db);
+exec.execJobAlerts();
 
 app.use(formdata.parse());
 app.use(express.json({ limit: "100mb", type: "application/json" }));

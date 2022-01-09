@@ -1,6 +1,6 @@
 import { Model } from "sequelize";
-import { TokenInterface } from "./TokenInterface";
-import { UserInterface } from "./UserInterface";
+import { Job } from "./Job";
+import { User } from "./User";
 
-export interface UserSchema extends Model<UserInterface>, UserInterface {}
-export interface TokenSchema extends Model<TokenInterface>, TokenInterface {}
+export interface UserSchema extends Model<User>, User {}
+export interface JobSchema extends Model<Job>, Job {}

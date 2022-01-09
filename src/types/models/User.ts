@@ -1,19 +1,17 @@
-export interface UserInterface {
+export interface User {
   id?: string;
   firstname?: string;
   lastname?: string;
-  username?: string;
   email?: string;
-  phone?: string;
+  country?: string;
   password?: string;
-  gender?: string;
+  planet?: string;
   dob?: string;
-  deleted?: boolean;
-  verifiedemail?: boolean;
-  verifiedphone?: boolean;
   role?: string;
+  verifiedemail?: boolean;
+  validatePassword?: Function;
   active?: boolean;
+  isDeleted?: boolean;
   createdAt?: Date;
-  transform?: Function;
   updatedAt?: Date;
 }
