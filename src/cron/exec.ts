@@ -7,7 +7,7 @@ export const execJobAlerts = async () => {
     queue: JobAlertQueue,
     options: {
       repeat: {
-        every: 1000 * 60 * 10, // Every 10mins
+        every: 1000 * 60 * 3, // Every 1 hour
       },
     },
     queueName: "sendJobAlert",
