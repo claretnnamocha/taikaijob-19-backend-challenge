@@ -14,6 +14,7 @@ export const sendJobAlerts = async () => {
     const where = { isBroadcasted: false, isDeleted: false };
 
     let jobs = await Job.findAll({ where });
+    console.log(jobs.length && to.length, jobs.length, to.length);
 
     if (jobs.length && to.length) {
       const html = jobAlertMail(jobs);
