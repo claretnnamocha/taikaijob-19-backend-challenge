@@ -18,8 +18,8 @@ export const sendJobAlerts = async () => {
     if (jobs.length && to.length) {
       const html = jobAlertMail(jobs);
       await mail.pepipost.send(to, "Job Alert Recomendations", html, html);
+      await Job.update({ isBroadcasted: true }, { where });
     }
-    await Job.update({ isBroadcasted: true }, { where });
   } catch (e) {
     console.log(e.message);
   }
